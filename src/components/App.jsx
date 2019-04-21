@@ -13,9 +13,9 @@ render() {
     <div className="col-5">
        <div className="mt-3">
         <ul className="list-group">
-          {channels.map(({ id, text }) => (
+          {channels.map(({ id, name }) => (
             <li key={id} className="list-group-item d-flex">
-              <span className="mr-auto">{text}</span>
+              <span className="mr-auto">{name}</span>
               <button type="button" className="close">
                 <span>&times;</span>
               </button>

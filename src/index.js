@@ -5,6 +5,7 @@ import React from 'react';
 import App from './components/App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import reducers from './reducers'
 // import faker from 'faker';
 // import cookies from 'js-cookie';
@@ -22,11 +23,8 @@ const init = ({ channels }) => (
 const store = createStore(
   reducers,
   { ...init(gon) },
-  compose(
-    applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
     /* eslint-enable */
-  ),
   );
 
 render(
