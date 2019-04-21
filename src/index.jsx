@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
-// import gon from 'gon';
+import gon from 'gon';
 import React from 'react';
-import App from './components/App';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducers from './reducers'
+import reducers from './reducers';
+import App from './components/App';
+
 // import faker from 'faker';
 // import cookies from 'js-cookie';
 // import io from 'socket.io-client';
@@ -23,9 +24,9 @@ const init = ({ channels }) => (
 const store = createStore(
   reducers,
   { ...init(gon) },
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
-    /* eslint-enable */
-  );
+  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
+  /* eslint-enable */
+);
 
 render(
   <Provider store={store}>
