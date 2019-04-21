@@ -23,3 +23,6 @@ publish:
 	npm publish
 
 .PHONY: test
+
+develop:
+	npx webpack-dev-server
