@@ -3,7 +3,7 @@ import ChannelList from './ChannelList';
 
 const App = () => (
   <div className="container">
-    <ChannelList /> 
+    <ChannelList />
   </div>
 );
 export default App;

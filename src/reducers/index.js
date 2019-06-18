@@ -1,24 +1,23 @@
-import _ from "lodash";
-import { combineReducers } from "redux";
-import { handleActions } from "redux-actions";
-import { reducer as formReducer } from "redux-form";
-import * as actions from "../actions";
+import { combineReducers } from 'redux';
+import { handleActions } from 'redux-actions';
+import { reducer as formReducer } from 'redux-form';
+import * as actions from '../actions';
 
 const channels = (state = {}) => state;
 
 const messagesFetchingState = handleActions(
   {
     [actions.fetchMessagesRequest]() {
-      return "requested";
+      return 'requested';
     },
     [actions.fetchMessagesSuccess]() {
-      return "succeeded";
+      return 'succeeded';
     },
     [actions.fetchMessagesFailure]() {
-      return "failed";
-    }
+      return 'failed';
+    },
   },
-  "none"
+  'none',
 );
 
 const messages = handleActions(
@@ -26,19 +25,18 @@ const messages = handleActions(
     [actions.addMessageSuccess](
       state,
       {
-        payload: { message }
-      }
+        payload: { message },
+      },
     ) {
-      console.log(state);
       return state.concat(message);
-    }
+    },
   },
-  []
+  [],
 );
 
 export default combineReducers({
   channels,
   messagesFetchingState,
   messages,
-  form: formReducer
+  form: formReducer,
 });

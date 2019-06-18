@@ -1,9 +1,8 @@
-import React from "react";
-import _ from "lodash";
-import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
-import * as actionCreators from "../actions";
-import { UserNameContext } from '../userNameContext';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import * as actionCreators from '../actions';
+import UserNameContext from '../userNameContext';
 
 
 const mapStateToProps = ({ channels, messages }) => {
@@ -15,15 +14,17 @@ const mapStateToProps = ({ channels, messages }) => {
 class ChannelList extends React.Component {
   static contextType = UserNameContext;
 
-  handleSubmit = async values => {
+  handleSubmit = async (values) => {
     const { addMessage, reset } = this.props;
     const task = { ...values, name: this.context };
-    console.log({task});
     await addMessage({ task });
     reset();
   };
+
   render() {
-    const { channels, handleSubmit, submitting, pristine, messages } = this.props;
+    const {
+      channels, handleSubmit, submitting, pristine, messages,
+    } = this.props;
     return (
       <div className="row">
         <div className="col-4">
@@ -57,7 +58,20 @@ class ChannelList extends React.Component {
               <div className="card text-center">
                 <div className="card-header text-left">General</div>
                 <div className="card-body text-left">
-                  {messages.map(({id, date, message, name}) => <div key={id}><p className="user-name font-weight-bold mb-0 text-info">{name} <span className="timestamp text-muted font-weight-light"><small>{date}</small></span></p><p className="message">{message}</p></div>)}
+                  {messages.map(({
+                    id, date, message, name,
+                  }) => (
+                    <div key={id}>
+                      <p className="user-name font-weight-bold mb-0 text-info">
+                        {name}
+                        <span className="timestamp text-muted font-weight-light">
+                          <small>
+                            {date}
+                          </small>
+                        </span>
+                      </p>
+                      <p className="message">{message}</p>
+                    </div>))}
                 </div>
                 <div className="card-footer text-muted">
                   <form
@@ -94,8 +108,8 @@ class ChannelList extends React.Component {
 
 const connectedChannelList = connect(
   mapStateToProps,
-  actionCreators
+  actionCreators,
 )(ChannelList);
 export default reduxForm({
-  form: "NewMessage"
+  form: 'NewMessage',
 })(connectedChannelList);

@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const UserNameContext = React.createContext();
+export default React.createContext();
