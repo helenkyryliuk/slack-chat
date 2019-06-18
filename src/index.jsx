@@ -20,16 +20,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const init = ({ channels, messages }) => ({ channels, messages });
-/* eslint-disable no-underscore-dangle */
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-const devtoolMiddleware = ext && ext();
-/* eslint-enable */
 const store = createStore(
   reducers,
   { ...init(gon) },
   compose(
     applyMiddleware(thunk),
-    devtoolMiddleware,
   ),
 );
 
