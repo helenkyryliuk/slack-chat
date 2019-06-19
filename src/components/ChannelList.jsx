@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {
+  Tab, ListGroup, Col, Row, Card, Button,
+} from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
-import * as actionCreators from '../actions';
 import UserNameContext from '../userNameContext';
+import connect from '../connect';
 
 
 const mapStateToProps = ({ channels, messages }) => {
@@ -10,7 +12,10 @@ const mapStateToProps = ({ channels, messages }) => {
   return props;
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
+@reduxForm({
+  form: 'NewMessage',
+})
 class ChannelList extends React.Component {
   static contextType = UserNameContext;
 
@@ -26,90 +31,79 @@ class ChannelList extends React.Component {
       channels, handleSubmit, submitting, pristine, messages,
     } = this.props;
     return (
-      <div className="row">
-        <div className="col-4">
-          <div className="d-flex justify-content-between mb-2">
-            <h4>Channels</h4>
-          </div>
-          <div className="list-group" id="list-tab" role="tablist">
-            {channels.map(({ id, name }) => (
-              <a
-                key={id}
-                className="list-group-item list-group-item-action active"
-                id="list-home-list"
-                data-toggle="list"
-                href="#list-home"
-                role="tab"
-                aria-controls="home"
-              >
-                {name}
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="col-8">
-          <div className="tab-content" id="nav-tabContent">
-            <div
-              className="tab-pane fade show active"
-              id="list-home"
-              role="tabpanel"
-              aria-labelledby="list-home-list"
-            >
-              <div className="card text-center">
-                <div className="card-header text-left">General</div>
-                <div className="card-body text-left">
-                  {messages.map(({
-                    id, date, message, name,
-                  }) => (
-                    <div key={id}>
-                      <p className="user-name font-weight-bold mb-0 text-info">
-                        {name}
-                        <span className="timestamp text-muted font-weight-light">
-                          <small>
-                            {date}
-                          </small>
-                        </span>
-                      </p>
-                      <p className="message">{message}</p>
-                    </div>))}
-                </div>
-                <div className="card-footer text-muted">
-                  <form
-                    action=""
-                    className="d-flex"
-                    onSubmit={handleSubmit(this.handleSubmit)}
-                  >
-                    <Field
-                      name="message"
-                      disabled={submitting}
-                      type="text"
-                      className="form-control"
-                      component="input"
-                      required
-                    />
-                    <div className="input-group-prepend">
-                      <input
-                        className="btn btn-success"
-                        type="submit"
-                        disabled={pristine || submitting}
-                        value="Send"
-                      />
-                    </div>
-                  </form>
-                </div>
+      <Tab.Container id="list-group-tabs-example" defaultActiveKey={1}>
+        <Row>
+          <Col sm={4}>
+            <ListGroup>
+              <div className="d-flex justify-content-between mb-2">
+                <h4>Channels</h4>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+              {channels.map(({ id, name }) => (
+                <ListGroup.Item key={id} action variant="info" href={id}>{name}</ListGroup.Item>
+              ))}
+
+            </ListGroup>
+          </Col>
+          <Col sm={8}>
+            <Tab.Content>
+              <Tab.Pane eventKey={1}>
+                <Card className="text-left">
+                  <Card.Header>General</Card.Header>
+                  <Card.Body>
+                    {messages.map(({
+                      id, date, message, name,
+                    }) => (
+                      <div key={id}>
+                        <p className="user-name font-weight-bold mb-0 text-info">
+                          {name}
+                          {' '}
+                          <span className="timestamp text-muted font-weight-light">
+                            <small>
+                              {date}
+                            </small>
+                          </span>
+                        </p>
+                        <p className="message">{message}</p>
+                      </div>))}
+                  </Card.Body>
+                  <Card.Footer className="text-muted">
+                    <form
+                      action=""
+                      className="d-flex"
+                      onSubmit={handleSubmit(this.handleSubmit)}
+                    >
+                      <div className="input-group">
+                        <Field
+                          name="message"
+                          disabled={submitting}
+                          type="text"
+                          className="form-control"
+                          component="input"
+                          required
+                        />
+                        <div className="input-group-append">
+                          <Button
+                            className="btn btn-info"
+                            type="submit"
+                            disabled={pristine || submitting}
+                          >
+                        Send
+                          </Button>
+
+                        </div>
+                      </div>
+                    </form>
+                  </Card.Footer>
+                </Card>
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
     );
   }
 }
 
-const connectedChannelList = connect(
-  mapStateToProps,
-  actionCreators,
-)(ChannelList);
-export default reduxForm({
-  form: 'NewMessage',
-})(connectedChannelList);
+export default ChannelList;

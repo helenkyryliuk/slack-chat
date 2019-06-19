@@ -5,21 +5,6 @@ import * as actions from '../actions';
 
 const channels = (state = {}) => state;
 
-const messagesFetchingState = handleActions(
-  {
-    [actions.fetchMessagesRequest]() {
-      return 'requested';
-    },
-    [actions.fetchMessagesSuccess]() {
-      return 'succeeded';
-    },
-    [actions.fetchMessagesFailure]() {
-      return 'failed';
-    },
-  },
-  'none',
-);
-
 const messages = handleActions(
   {
     [actions.addMessageSuccess](
@@ -36,7 +21,6 @@ const messages = handleActions(
 
 export default combineReducers({
   channels,
-  messagesFetchingState,
   messages,
   form: formReducer,
 });
