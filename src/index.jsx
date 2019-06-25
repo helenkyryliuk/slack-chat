@@ -12,19 +12,27 @@ import cookies from 'js-cookie';
 import io from 'socket.io-client';
 import reducers from './reducers';
 import App from './components/App';
-import { addMessageSuccess } from './actions';
+import { addMessageSuccess, addChannelSuccess, removeChannelSuccess } from './actions';
 import UserNameContext from './userNameContext';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
+/* eslint-disable no-underscore-dangle */
+const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
+const devtoolMiddleware = ext && ext();
+/* eslint-enable */
 
-const init = ({ channels, messages }) => ({ channels, messages });
+const init = (data) => {
+  const { channels, messages, currentChannelId } = data;
+  return ({ channels, messages, currentChannelId });
+};
 const store = createStore(
   reducers,
   { ...init(gon) },
   compose(
     applyMiddleware(thunk),
+    devtoolMiddleware,
   ),
 );
 
@@ -46,4 +54,10 @@ render(
 const socket = io();
 socket.on('newMessage', ({ data: { attributes } }) => {
   store.dispatch(addMessageSuccess({ message: attributes }));
+});
+socket.on('newChannel', ({ data: { attributes } }) => {
+  store.dispatch(addChannelSuccess({ channel: attributes }));
+});
+socket.on('removeChannel', ({ data: { id } }) => {
+  store.dispatch(removeChannelSuccess({ id }));
 });
