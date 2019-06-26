@@ -110,6 +110,34 @@ const channelRenamingState = handleActions({
   },
 }, 'none');
 
+const notification = handleActions({
+  [actions.renameChannelSuccess]() {
+    return {
+      type: 'success',
+      headline: 'Channel has been updated',
+      message: 'You have successfully updated the channel',
+    };
+  },
+  [actions.addChannelSuccess]() {
+    return {
+      type: 'success',
+      headline: 'New channel has been added',
+      message: 'You have successfully added a new channel to the chat',
+    };
+  },
+  [actions.removeChannelSuccess]() {
+    return {
+      type: 'success',
+      headline: 'Channel has been removed',
+      message: 'You have successfully removed the channel from the chat',
+    };
+  },
+  [actions.dismissNotification]() {
+    const info = null;
+    return info;
+  },
+}, null);
+
 export default combineReducers({
   channelsState,
   messages,
@@ -117,5 +145,6 @@ export default combineReducers({
   channelAddingState,
   channelRenamingState,
   currentChannelId,
+  notification,
   form: formReducer,
 });

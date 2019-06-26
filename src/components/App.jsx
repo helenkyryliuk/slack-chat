@@ -1,9 +1,9 @@
 import React from 'react';
-import ChannelList from './ChannelList';
+import Chat from './Chat';
 
 const App = () => (
   <div className="container">
-    <ChannelList />
+    <Chat />
   </div>
 );
 export default App;

@@ -64,6 +64,8 @@ export const addChannel = ({ name }) => async (dispatch) => {
 export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
 export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
 export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
+export const dismissNotification = createAction('NOTIFICATION_DISMISS');
+
 
 export const renameChannel = ({ name }, id) => async (dispatch) => {
   dispatch(renameChannelRequest());
