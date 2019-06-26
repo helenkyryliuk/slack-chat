@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
 import gon from 'gon';
+import _ from 'lodash';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,7 +13,9 @@ import cookies from 'js-cookie';
 import io from 'socket.io-client';
 import reducers from './reducers';
 import App from './components/App';
-import { addMessageSuccess, addChannelSuccess, removeChannelSuccess } from './actions';
+import {
+  addMessageSuccess, addChannelSuccess, removeChannelSuccess, renameChannelSuccess,
+} from './actions';
 import UserNameContext from './userNameContext';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -25,7 +28,10 @@ const devtoolMiddleware = ext && ext();
 
 const init = (data) => {
   const { channels, messages, currentChannelId } = data;
-  return ({ channels, messages, currentChannelId });
+  const channelsById = _.keyBy(channels, 'id');
+  const channelsAllIds = channels.map(c => c.id);
+  const channelsState = { byId: channelsById, allIds: channelsAllIds };
+  return ({ channelsState, messages, currentChannelId });
 };
 const store = createStore(
   reducers,
@@ -60,4 +66,7 @@ socket.on('newChannel', ({ data: { attributes } }) => {
 });
 socket.on('removeChannel', ({ data: { id } }) => {
   store.dispatch(removeChannelSuccess({ id }));
+});
+socket.on('renameChannel', ({ data: { attributes } }) => {
+  store.dispatch(renameChannelSuccess({ channel: attributes }));
 });

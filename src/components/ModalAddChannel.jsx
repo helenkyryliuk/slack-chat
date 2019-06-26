@@ -39,6 +39,7 @@ class ModalAddChannel extends React.Component {
       const {
         handleSubmit, submitting, pristine,
       } = this.props;
+      const { show } = this.state;
       return (
         <>
           <Button variant="light" onClick={this.handleShow}>
@@ -47,7 +48,7 @@ class ModalAddChannel extends React.Component {
               className="text-info"
             />
           </Button>
-          <Modal show={this.state.show} onHide={this.handleClose} centered>
+          <Modal show={show} onHide={this.handleClose} centered>
             <Modal.Header closeButton>
               <Modal.Title>New channel name</Modal.Title>
             </Modal.Header>

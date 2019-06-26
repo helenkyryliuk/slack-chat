@@ -60,3 +60,23 @@ export const addChannel = ({ name }) => async (dispatch) => {
     throw e;
   }
 };
+
+export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
+export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
+export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
+
+export const renameChannel = ({ name }, id) => async (dispatch) => {
+  dispatch(renameChannelRequest());
+  try {
+    const url = routes.updateChannelName(id);
+    const data = {
+      attributes: {
+        name,
+      },
+    };
+    await axios.patch(url, { data });
+  } catch (e) {
+    dispatch(renameChannelFailure());
+    throw e;
+  }
+};

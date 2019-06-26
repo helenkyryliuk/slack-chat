@@ -6,5 +6,5 @@ export default {
   getChannelData: id => [host, 'api/v1/channels', id].join('/'),
   deleteChannel: id => [host, 'api/v1/channels', id].join('/'),
   addChannel: () => [host, 'api/v1/channels'].join('/'),
-  updateChannel: id => [host, 'api/v1/channels', id].join('/'),
+  updateChannelName: id => [host, 'api/v1/channels', id].join('/'),
 };

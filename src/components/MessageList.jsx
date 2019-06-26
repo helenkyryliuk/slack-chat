@@ -1,10 +1,10 @@
 import React from 'react';
 import connect from '../connect';
 
-const mapStateToProps = ({ messages, currentChannelId }) => {
-  const messageByChannel = messages.filter(m => m.channelId === currentChannelId);
+const mapStateToProps = (state) => {
+  const messageByChannel = state.messages.filter(m => m.channelId === state.currentChannelId);
   const props = {
-    currentChannelId, messageByChannel,
+    currentChannelId: state.currentChannelId, messageByChannel,
   };
   return props;
 };

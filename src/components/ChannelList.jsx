@@ -1,20 +1,20 @@
 import React from 'react';
-import _ from 'lodash';
+import cn from 'classnames';
 import {
   Tab, ListGroup, Col, Row, Card, Button, ButtonGroup,
 } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import connect from '../connect';
 import MessageList from './MessageList';
 import ModalAddChannel from './ModalAddChannel';
 import MessageForm from './MessageForm';
 import ChannelHeader from './ChannelHeader';
 import ModalRemoveChannel from './ModalRemoveChannel';
+import ModalRenameChannel from './ModalRenameChannel';
 
-const mapStateToProps = ({ channels, currentChannelId }) => {
+const mapStateToProps = (state) => {
   const props = {
-    channels, currentChannelId,
+    channels: state.channelsState.allIds.map(channel => state.channelsState.byId[channel]),
+    currentChannelId: state.currentChannelId,
   };
   return props;
 };
@@ -35,6 +35,9 @@ class ChannelList extends React.Component {
     const {
       channels, currentChannelId,
     } = this.props;
+    const classesForChannelName = id => ({
+      'text-light': id === currentChannelId,
+    });
     return (
       <Tab.Container id="list-group-tabs-example" defaultActiveKey={currentChannelId}>
         <Row>
@@ -46,16 +49,12 @@ class ChannelList extends React.Component {
               </div>
               {channels.map(({ id, name, removable }) => (
                 <ListGroup.Item as="div" className="d-flex justify-content-between" key={id} action variant="info" onClick={this.changeChannelId(id)} eventKey={id}>
-                  <Button variant="inherit">{name}</Button>
+                  <Button variant="inherit" className={cn(classesForChannelName(id))}>{name}</Button>
                   <ButtonGroup>
                     {removable ? (
                       <ModalRemoveChannel />
                     ) : ''}
-                    <Button variant="inherit" className="text-info">
-                      <FontAwesomeIcon
-                        icon={faPencilAlt}
-                      />
-                    </Button>
+                    <ModalRenameChannel />
                   </ButtonGroup>
                 </ListGroup.Item>
               ))}

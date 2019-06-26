@@ -1,11 +1,17 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Field, reduxForm } from 'redux-form';
 import connect from '../connect';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ currentChannelId }) => {
+  const props = {
+    currentChannelId,
+  };
+  return props;
+};
+
   @connect(mapStateToProps)
 
 @reduxForm({
@@ -21,11 +27,12 @@ class ModalRenameChannel extends React.Component {
     }
 
     handleSubmit = async (value) => {
-      const { renameChannel, reset } = this.props;
-      await renameChannel({ name: value.name });
+      const { renameChannel, reset, currentChannelId } = this.props;
+      await renameChannel({ name: value.name }, currentChannelId);
       reset();
       this.handleClose();
     };
+
 
     handleClose = () => {
       this.setState({ show: false });
@@ -39,15 +46,16 @@ class ModalRenameChannel extends React.Component {
       const {
         handleSubmit, submitting, pristine,
       } = this.props;
+      const { show } = this.state;
       return (
         <>
-          <Button variant="light" onClick={this.handleShow}>
+          <Button variant="inherit" onClick={this.handleShow}>
             <FontAwesomeIcon
-              icon={faPlus}
+              icon={faPencilAlt}
               className="text-info"
             />
           </Button>
-          <Modal show={this.state.show} onHide={this.handleClose} centered>
+          <Modal show={show} onHide={this.handleClose} centered>
             <Modal.Header closeButton>
               <Modal.Title>New channel name</Modal.Title>
             </Modal.Header>

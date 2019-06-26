@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import connect from '../connect';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ currentChannelId }) => {
+  const props = {
+    currentChannelId,
+  };
+  return props;
+};
   @connect(mapStateToProps)
 
 class ModalRemoveChannel extends React.Component {
@@ -32,6 +37,7 @@ class ModalRemoveChannel extends React.Component {
 
     render() {
       const { show } = this.state;
+      const { currentChannelId } = this.props;
       return (
         <>
           <Button variant="inherit" onClick={this.handleShow}>
@@ -49,7 +55,7 @@ class ModalRemoveChannel extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <Button
-                onClick={this.handleRemoveChannel}
+                onClick={this.handleRemoveChannel(currentChannelId)}
                 className="btn btn-info"
               >
                 Delete

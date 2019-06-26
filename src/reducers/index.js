@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
-const channels = handleActions(
+const channelsState = handleActions(
   {
     [actions.addChannelSuccess](
       state,
@@ -11,7 +12,11 @@ const channels = handleActions(
         payload: { channel },
       },
     ) {
-      return state.concat(channel);
+      const { byId, allIds } = state;
+      return {
+        byId: { ...byId, [channel.id]: channel },
+        allIds: [...allIds, channel.id],
+      };
     },
     [actions.removeChannelSuccess](
       state,
@@ -19,10 +24,26 @@ const channels = handleActions(
         payload: { id },
       },
     ) {
-      return state.filter(c => c.id !== id);
+      const { byId, allIds } = state;
+      return {
+        byId: _.omit(byId, id),
+        allIds: _.without(allIds, id),
+      };
+    },
+    [actions.renameChannelSuccess](
+      state,
+      {
+        payload: { channel },
+      },
+    ) {
+      const { byId, allIds } = state;
+      return {
+        byId: _.set(byId, [channel.id, 'name'], channel.name),
+        allIds,
+      };
     },
   },
-  [],
+  { byId: {}, allIds: [] },
 );
 
 const currentChannelId = handleActions(
@@ -77,11 +98,24 @@ const channelAddingState = handleActions({
   },
 }, 'none');
 
+const channelRenamingState = handleActions({
+  [actions.renameChannelRequest]() {
+    return 'requested';
+  },
+  [actions.renameChannelFailure]() {
+    return 'failed';
+  },
+  [actions.renameChannelSuccess]() {
+    return 'finished';
+  },
+}, 'none');
+
 export default combineReducers({
-  channels,
+  channelsState,
   messages,
   channelRemovingState,
   channelAddingState,
+  channelRenamingState,
   currentChannelId,
   form: formReducer,
 });
