@@ -3,7 +3,7 @@
 
 ## :white_check_mark: General info
 
-# Slack Chat Web App (very light version)
+# Slack chat web application (simple version)
 
 Manage channels (add, delete, update)
 Real-time chat in every channel
@@ -12,15 +12,15 @@ Real-time chat in every channel
 
 ## :file_folder: Examples
 
+Update channel 
+
+<p align="center">
+  <img alt="Updating channel" src="https://user-images.githubusercontent.com/29301041/60228803-fc57f180-98e7-11e9-9917-6637c6a3fb3c.gif"></p>
+  
 Add new channel to the chat
 
 <p align="center">
   <img alt="Add new channel to the chat" src="https://user-images.githubusercontent.com/29301041/60162318-65d6f200-984d-11e9-9eaa-ce9ba6fad89a.gif"></p>
-
-Update channel 
-
-<p align="center">
-  <img alt="Updating channel" src=""></p>
 
 Remove channel from the chat
 
