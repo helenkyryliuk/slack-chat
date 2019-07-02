@@ -1,9 +1,5 @@
 {
     "alert": {
-      "error": {
-        "message": "something went wrong, try one more time, please",
-        "headline": "Oops!"
-      },
       "channel-updated": {
         "message": "You have successfully updated the channel",
         "headline": "Channel has been updated"

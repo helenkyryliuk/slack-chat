@@ -60,22 +60,6 @@ const currentChannelId = handleActions(
   null,
 );
 
-const currentChannelName = handleActions(
-  {
-    [actions.renameChannelSuccess](
-      state,
-      {
-        payload: { channel },
-      },
-    ) {
-      const { byId } = state;
-      const name = _.get(byId, [channel.id, 'name'], null);
-      return name;
-    },
-  },
-  '',
-);
-
 const messages = handleActions(
   {
     [actions.addMessageSuccess](
@@ -103,9 +87,6 @@ const channelRemovingState = handleActions({
 }, 'none');
 
 const channelAddingState = handleActions({
-  [actions.addChannelRequest]() {
-    return 'requested';
-  },
   [actions.addChannelFailure]() {
     return 'failed';
   },
@@ -115,9 +96,6 @@ const channelAddingState = handleActions({
 }, 'none');
 
 const channelRenamingState = handleActions({
-  [actions.renameChannelRequest]() {
-    return 'requested';
-  },
   [actions.renameChannelFailure]() {
     return 'failed';
   },
@@ -200,7 +178,6 @@ export default combineReducers({
   channelAddingState,
   channelRenamingState,
   currentChannelId,
-  currentChannelName,
   notification,
   form: formReducer,
 });
