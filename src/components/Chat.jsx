@@ -3,6 +3,7 @@ import {
   Tab, ListGroup, Col, Row, Card,
 } from 'react-bootstrap';
 import { Alert, AlertContainer } from 'react-bs-notifier';
+import { withTranslation } from 'react-i18next';
 import connect from '../connect';
 import MessageList from './MessageList';
 import ModalAddChannel from './ModalAddChannel';
@@ -21,9 +22,10 @@ const mapStateToProps = (state) => {
 };
 
 @connect(mapStateToProps)
+@withTranslation()
 class Chat extends React.Component {
   renderAlert() {
-    const { notification, dismissNotification } = this.props;
+    const { notification, dismissNotification, t } = this.props;
     if (!notification) {
       return null;
     }
@@ -34,9 +36,9 @@ class Chat extends React.Component {
             timeout={3000}
             onDismiss={dismissNotification}
             type={notification.type}
-            headline={notification.headline}
+            headline={t(notification.headline)}
           >
-            {notification.message}
+            {t(notification.message)}
           </Alert>
         </AlertContainer>
       </div>

@@ -20,12 +20,26 @@ const mapStateToProps = ({ currentChannelId }) => {
 class MessageForm extends React.Component {
     static contextType = UserNameContext;
 
+    constructor(props) {
+      super(props);
+      this.input = React.createRef();
+    }
+
+    // componentDidMount() {
+    //   this.input.current.getRenderedComponent().focus();
+    // }
+
+    // componentDidUpdate() {
+    //   this.input.current.getRenderedComponent().focus();
+    // }
+
     handleSubmit = async (values) => {
       const { addMessage, reset, currentChannelId } = this.props;
       const message = { ...values, name: this.context, channelId: currentChannelId };
       await addMessage({ message });
       reset();
     };
+
 
     render() {
       const {
@@ -39,12 +53,16 @@ class MessageForm extends React.Component {
         >
           <div className="input-group">
             <Field
+              autoFocus
+              placeholder="Message"
               name="message"
               disabled={submitting}
               type="text"
               className="form-control"
               component="input"
               required
+              // ref={this.input}
+              // forwardRef
             />
             <div className="input-group-append">
               <Button

@@ -60,6 +60,22 @@ const currentChannelId = handleActions(
   null,
 );
 
+const currentChannelName = handleActions(
+  {
+    [actions.renameChannelSuccess](
+      state,
+      {
+        payload: { channel },
+      },
+    ) {
+      const { byId } = state;
+      const name = _.get(byId, [channel.id, 'name'], null);
+      return name;
+    },
+  },
+  '',
+);
+
 const messages = handleActions(
   {
     [actions.addMessageSuccess](
@@ -114,23 +130,62 @@ const notification = handleActions({
   [actions.renameChannelSuccess]() {
     return {
       type: 'success',
-      headline: 'Channel has been updated',
-      message: 'You have successfully updated the channel',
+      headline: 'alert.channel-updated.headline',
+      message: 'alert.channel-updated.message',
     };
   },
   [actions.addChannelSuccess]() {
     return {
       type: 'success',
-      headline: 'New channel has been added',
-      message: 'You have successfully added a new channel to the chat',
+      headline: 'alert.channel-added.headline',
+      message: 'alert.channel-added.message',
     };
   },
   [actions.removeChannelSuccess]() {
     return {
       type: 'success',
-      headline: 'Channel has been removed',
-      message: 'You have successfully removed the channel from the chat',
+      headline: 'alert.channel-removed.headline',
+      message: 'alert.channel-removed.message',
     };
+  },
+  [actions.addChannelFailure]: (_state, { payload }) => {
+    let message;
+    switch (payload.code) {
+      case 404:
+        message = 'alert.channel-add-failure.forbidden';
+        break;
+      default:
+        message = 'alert.channel-add-failure.message';
+        break;
+    }
+    const msg = { type: 'danger', headline: 'alert.channel-add-failure.headline', message };
+    return msg;
+  },
+  [actions.removeChannelFailure]: (_state, { payload }) => {
+    let message;
+    switch (payload.code) {
+      case 404:
+        message = 'alert.channel-remove-failure.forbidden';
+        break;
+      default:
+        message = 'alert.channel-remove-failure.message';
+        break;
+    }
+    const msg = { type: 'danger', headline: 'alert.channel-remove-failure.headline', message };
+    return msg;
+  },
+  [actions.renameChannelFailure]: (_state, { payload }) => {
+    let message;
+    switch (payload.code) {
+      case 404:
+        message = 'alert.channel-rename-failure.forbidden';
+        break;
+      default:
+        message = 'alert.channel-rename-failure.message';
+        break;
+    }
+    const msg = { type: 'danger', headline: 'alert.channel-rename-failure.headline', message };
+    return msg;
   },
   [actions.dismissNotification]() {
     const info = null;
@@ -145,6 +200,7 @@ export default combineReducers({
   channelAddingState,
   channelRenamingState,
   currentChannelId,
+  currentChannelName,
   notification,
   form: formReducer,
 });

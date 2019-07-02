@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import cn from 'classnames';
 import {
   Button, ButtonGroup, ListGroup,
@@ -11,6 +12,7 @@ const mapStateToProps = (state) => {
   const props = {
     channels: state.channelsState.allIds.map(channel => state.channelsState.byId[channel]),
     currentChannelId: state.currentChannelId,
+    currentChannelName: _.get(state.channelsState.byId, [state.currentChannelId, 'name'], ''),
   };
   return props;
 };
@@ -24,7 +26,7 @@ class ChannelList extends React.Component {
 
     render() {
       const {
-        channels, currentChannelId,
+        channels, currentChannelId, currentChannelName,
       } = this.props;
       const classesForChannelName = id => ({
         'text-light': id === currentChannelId,
@@ -37,7 +39,7 @@ class ChannelList extends React.Component {
               {removable ? (
                 <ModalRemoveChannel />
               ) : ''}
-              <ModalRenameChannel />
+              <ModalRenameChannel initialValues={{ name: currentChannelName }} />
             </ButtonGroup>
           </ListGroup.Item>
         ))}

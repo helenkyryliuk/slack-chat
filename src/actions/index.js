@@ -21,7 +21,8 @@ export const addMessage = ({ message: { message, name, channelId } }) => async (
     };
     await axios.post(routes.postMessage(channelId), { data });
   } catch (e) {
-    dispatch(addMessageFailure());
+    dispatch(addMessageFailure({ code: e.response.status }));
+    throw e;
   }
 };
 
@@ -32,14 +33,15 @@ export const removeChannelFailure = createAction('CHANNEL_REMOVE_FAILURE');
 export const removeChannel = channel => async (dispatch) => {
   dispatch(removeChannelRequest());
   try {
-    const url = routes.deleteChannel(channel.id);
+    const url = routes.updateChannel(channel.id);
     await axios.delete(url);
   } catch (e) {
-    dispatch(removeChannelFailure());
+    dispatch(removeChannelFailure({ code: e.response.status }));
     throw e;
   }
 };
 export const changeCurrentChannelId = createAction('CURRENT_CHANNEL_ID_CHANGE');
+export const changeCurrentChannelName = createAction('CURRENT_CHANNEL_NAME_CHANGE');
 
 export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
@@ -48,7 +50,7 @@ export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
 export const addChannel = ({ name }) => async (dispatch) => {
   dispatch(addChannelRequest());
   try {
-    const url = routes.addChannel();
+    const url = routes.requestChannel();
     const data = {
       attributes: {
         name,
@@ -56,7 +58,7 @@ export const addChannel = ({ name }) => async (dispatch) => {
     };
     await axios.post(url, { data });
   } catch (e) {
-    dispatch(removeChannelFailure());
+    dispatch(addChannelFailure({ code: e.response.status }));
     throw e;
   }
 };
@@ -66,11 +68,10 @@ export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
 export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
 export const dismissNotification = createAction('NOTIFICATION_DISMISS');
 
-
 export const renameChannel = ({ name }, id) => async (dispatch) => {
   dispatch(renameChannelRequest());
   try {
-    const url = routes.updateChannelName(id);
+    const url = routes.updateChannel(id);
     const data = {
       attributes: {
         name,
@@ -78,7 +79,7 @@ export const renameChannel = ({ name }, id) => async (dispatch) => {
     };
     await axios.patch(url, { data });
   } catch (e) {
-    dispatch(renameChannelFailure());
+    dispatch(renameChannelFailure({ code: e.response.status }));
     throw e;
   }
 };

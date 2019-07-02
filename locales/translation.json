@@ -1,0 +1,36 @@
+{
+    "alert": {
+      "error": {
+        "message": "something went wrong, try one more time, please",
+        "headline": "Oops!"
+      },
+      "channel-updated": {
+        "message": "You have successfully updated the channel",
+        "headline": "Channel has been updated"
+      },
+      "channel-added": {
+        "message": "You have successfully added a new channel to the chat",
+        "headline": "New channel has been added"
+      },
+      "channel-removed": {
+        "message": "You have successfully removed the channel from the chat",
+        "headline": "Channel has been removed"
+      },
+      "channel-remove-failure": {
+        "forbidden": "Internet connection lost, please try to connect again",
+        "message": "Something went wrong. Please, try again.",
+        "headline": "Oops!"
+      },
+      "channel-rename-failure": {
+        "forbidden": "Internet connection lost, please try to connect again",
+        "message": "Something went wrong. Please, try again.",
+        "headline": "Oops!"
+      },
+      "channel-add-failure": {
+        "forbidden": "Internet connection lost, please try to connect again",
+        "message": "Something went wrong. Please, try again.",
+        "headline": "Oops!"
+      }
+    }
+  }
+  

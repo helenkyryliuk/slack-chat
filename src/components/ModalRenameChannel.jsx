@@ -5,9 +5,9 @@ import { faPencilAlt, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Field, reduxForm } from 'redux-form';
 import connect from '../connect';
 
-const mapStateToProps = ({ currentChannelId }) => {
+const mapStateToProps = (state) => {
   const props = {
-    currentChannelId,
+    currentChannelId: state.currentChannelId,
   };
   return props;
 };
@@ -16,6 +16,7 @@ const mapStateToProps = ({ currentChannelId }) => {
 
 @reduxForm({
   form: 'RenameChannel',
+  enableReinitialize: true,
 })
 class ModalRenameChannel extends React.Component {
     constructor(props, context) {

@@ -4,6 +4,7 @@ import '../assets/application.css';
 import gon from 'gon';
 import _ from 'lodash';
 import React from 'react';
+import '../lib/i18n';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
