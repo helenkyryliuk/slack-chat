@@ -3,12 +3,10 @@ import { createAction } from 'redux-actions';
 import dateFormat from 'dateformat';
 import routes from '../routes';
 
-export const addMessageRequest = createAction('MESSAGE_ADD_REQUEST');
 export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
 export const addMessageFailure = createAction('MESSAGE_ADD_FAILURE');
 
 export const addMessage = ({ message: { message, name, channelId } }) => async (dispatch) => {
-  dispatch(addMessageRequest());
   try {
     const time = new Date();
     const formattedTime = dateFormat(time, 'h:MM TT');
@@ -43,12 +41,10 @@ export const removeChannel = channel => async (dispatch) => {
 export const changeCurrentChannelId = createAction('CURRENT_CHANNEL_ID_CHANGE');
 export const changeCurrentChannelName = createAction('CURRENT_CHANNEL_NAME_CHANGE');
 
-export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
 export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
 
 export const addChannel = ({ name }) => async (dispatch) => {
-  dispatch(addChannelRequest());
   try {
     const url = routes.requestChannel();
     const data = {
@@ -63,13 +59,11 @@ export const addChannel = ({ name }) => async (dispatch) => {
   }
 };
 
-export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
 export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
 export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
 export const dismissNotification = createAction('NOTIFICATION_DISMISS');
 
 export const renameChannel = ({ name }, id) => async (dispatch) => {
-  dispatch(renameChannelRequest());
   try {
     const url = routes.updateChannel(id);
     const data = {

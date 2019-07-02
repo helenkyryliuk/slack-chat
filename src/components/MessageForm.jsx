@@ -25,9 +25,9 @@ class MessageForm extends React.Component {
       this.input = React.createRef();
     }
 
-    // componentDidMount() {
-    //   this.input.current.getRenderedComponent().focus();
-    // }
+    componentDidMount() {
+      this.input.current.getRenderedComponent().focus();
+    }
 
     // componentDidUpdate() {
     //   this.input.current.getRenderedComponent().focus();
@@ -53,16 +53,14 @@ class MessageForm extends React.Component {
         >
           <div className="input-group">
             <Field
-              autoFocus
-              placeholder="Message"
               name="message"
               disabled={submitting}
               type="text"
               className="form-control"
               component="input"
               required
-              // ref={this.input}
-              // forwardRef
+              ref={this.input}
+              forwardRef
             />
             <div className="input-group-append">
               <Button
