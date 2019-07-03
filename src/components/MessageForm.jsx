@@ -29,9 +29,9 @@ class MessageForm extends React.Component {
       this.input.current.getRenderedComponent().focus();
     }
 
-    // componentDidUpdate() {
-    //   this.input.current.getRenderedComponent().focus();
-    // }
+    componentDidUpdate() {
+      this.input.current.getRenderedComponent().focus();
+    }
 
     handleSubmit = async (values) => {
       const { addMessage, reset, currentChannelId } = this.props;

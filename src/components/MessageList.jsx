@@ -29,8 +29,10 @@ class MessageList extends React.Component {
                 </span>
               </p>
               <p className="message">{message}</p>
-            </div>))}
-        </div>);
+            </div>
+          ))}
+        </div>
+      );
     }
   }
 
