@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/helenkyryliuk/project-lvl4-s415.svg?branch=master)](https://travis-ci.org/helenkyryliuk/project-lvl4-s415)
-[![Maintainability](https://api.codeclimate.com/v1/badges/450443cb1d18ee21bffa/maintainability)](https://codeclimate.com/github/helenkyryliuk/project-lvl4-s415/maintainability)
+[![Build Status](https://travis-ci.org/helenkyryliuk/slack-chat.svg?branch=master)](https://travis-ci.org/helenkyryliuk/slack-chat)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3d5947aaba0778630c99/maintainability)](https://codeclimate.com/github/helenkyryliuk/slack-chat/maintainability)
 
 ## :white_check_mark: General info
 
