@@ -23,10 +23,6 @@ import UserNameContext from './userNameContext';
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
-/* eslint-disable no-underscore-dangle */
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-const devtoolMiddleware = ext && ext();
-/* eslint-enable */
 
 const init = (data) => {
   const { channels, messages, currentChannelId } = data;
@@ -40,7 +36,6 @@ const store = createStore(
   { ...init(gon) },
   compose(
     applyMiddleware(thunk),
-    devtoolMiddleware,
   ),
 );
 
