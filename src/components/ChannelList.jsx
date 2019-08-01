@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import cn from 'classnames';
 import {
   Button, ButtonGroup, ListGroup,
@@ -7,12 +6,13 @@ import {
 import ModalRemoveChannel from './ModalRemoveChannel';
 import ModalRenameChannel from './ModalRenameChannel';
 import connect from '../connect';
+import { channelsSelector, channelNameSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
   const props = {
-    channels: state.channelsState.allIds.map(channel => state.channelsState.byId[channel]),
+    channels: channelsSelector(state),
     currentChannelId: state.currentChannelId,
-    currentChannelName: _.get(state.channelsState.byId, [state.currentChannelId, 'name'], ''),
+    currentChannelName: channelNameSelector(state),
   };
   return props;
 };

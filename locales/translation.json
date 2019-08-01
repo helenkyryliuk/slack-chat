@@ -5,11 +5,11 @@
         "headline": "Channel has been updated"
       },
       "channel-added": {
-        "message": "You have successfully added a new channel to the chat",
+        "message": "You have successfully added a new channel",
         "headline": "New channel has been added"
       },
       "channel-removed": {
-        "message": "You have successfully removed the channel from the chat",
+        "message": "You have successfully removed the channel",
         "headline": "Channel has been removed"
       },
       "channel-remove-failure": {

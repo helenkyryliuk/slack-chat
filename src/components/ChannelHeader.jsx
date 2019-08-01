@@ -1,15 +1,10 @@
 import React from 'react';
 import connect from '../connect';
+import { currentChannelSelector } from '../selectors';
 
-const mapStateToProps = (state) => {
-  const channels = state.channelsState.allIds.map(channel => state.channelsState.byId[channel]);
-  const currentChannel = channels.filter(c => c.id === state.currentChannelId);
-  const props = {
-    currentChannelId: state.currentChannelId,
-    currentChannel,
-  };
-  return props;
-};
+const mapStateToProps = state => ({
+  currentChannel: currentChannelSelector(state),
+});
 
   @connect(mapStateToProps)
 

@@ -1,13 +1,10 @@
 import React from 'react';
 import connect from '../connect';
+import { messagesSelector } from '../selectors';
 
-const mapStateToProps = (state) => {
-  const messageByChannel = state.messages.filter(m => m.channelId === state.currentChannelId);
-  const props = {
-    currentChannelId: state.currentChannelId, messageByChannel,
-  };
-  return props;
-};
+const mapStateToProps = state => ({
+  messageByChannel: messagesSelector(state),
+});
 
   @connect(mapStateToProps)
 class MessageList extends React.Component {

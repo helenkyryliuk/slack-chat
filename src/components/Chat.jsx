@@ -10,11 +10,12 @@ import ModalAddChannel from './ModalAddChannel';
 import MessageForm from './MessageForm';
 import ChannelList from './ChannelList';
 import ChannelHeader from './ChannelHeader';
+import { channelsSelector } from '../selectors';
 
 
 const mapStateToProps = (state) => {
   const props = {
-    channels: state.channelsState.allIds.map(channel => state.channelsState.byId[channel]),
+    channels: channelsSelector(state),
     currentChannelId: state.currentChannelId,
     notification: state.notification,
   };
