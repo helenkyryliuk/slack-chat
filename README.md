@@ -40,8 +40,10 @@ Remove channel from the chat
 
 Project is created with:
 
+* React + Redux + Forms
 * Ajax, REST
 * Websockets
-* React + Redux + Forms
 * Bootstrap on React
 * Webpack
+* Selectors, Decorators
+* React Context

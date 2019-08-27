@@ -6,6 +6,9 @@ import routes from '../routes';
 export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
 export const addMessageFailure = createAction('MESSAGE_ADD_FAILURE');
 
+export const setMessageBoxAlignToBottom = createAction('MESSAGE_BOX_SET_ALIGN_TO_BOTTOM');
+export const unsetMessageBoxAlignToBottom = createAction('MESSAGE_BOX_UNSET_ALIGN_TO_BOTTOM');
+
 export const addMessage = ({ message: { message, name, channelId } }) => async (dispatch) => {
   try {
     const time = new Date();

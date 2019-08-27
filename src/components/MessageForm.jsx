@@ -58,6 +58,7 @@ class MessageForm extends React.Component {
               type="text"
               className="form-control"
               component="input"
+              placeholder="Type a message here"
               required
               ref={this.input}
               forwardRef

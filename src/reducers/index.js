@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
-import { handleActions } from 'redux-actions';
+import { combineActions, handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
@@ -104,6 +104,11 @@ const channelRenamingState = handleActions({
   },
 }, 'none');
 
+const messagesBoxBottomAlignState = handleActions({
+  [combineActions(actions.setMessageBoxAlignToBottom, actions.addMessageSuccess)]: _.constant('on'),
+  [actions.unsetMessageBoxAlignToBottom]: _.constant('off'),
+}, 'on');
+
 const notification = handleActions({
   [actions.renameChannelSuccess]() {
     return {
@@ -179,5 +184,6 @@ export default combineReducers({
   channelRenamingState,
   currentChannelId,
   notification,
+  messagesBoxBottomAlignState,
   form: formReducer,
 });

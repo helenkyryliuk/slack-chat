@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  Tab, ListGroup, Col, Row, Card,
+  Tab, ListGroup, Col,
 } from 'react-bootstrap';
 import { Alert, AlertContainer } from 'react-bs-notifier';
 import { withTranslation } from 'react-i18next';
 import connect from '../connect';
-import MessageList from './MessageList';
 import ModalAddChannel from './ModalAddChannel';
-import MessageForm from './MessageForm';
 import ChannelList from './ChannelList';
-import ChannelHeader from './ChannelHeader';
 import { channelsSelector } from '../selectors';
+import ChatContainer from './ChatContainer';
 
 
 const mapStateToProps = (state) => {
@@ -21,6 +19,7 @@ const mapStateToProps = (state) => {
   };
   return props;
 };
+
 
 @connect(mapStateToProps)
 @withTranslation()
@@ -52,9 +51,9 @@ class Chat extends React.Component {
     } = this.props;
     return (
       <Tab.Container id="list-group-tabs-example" defaultActiveKey={currentChannelId}>
-        <Row>
+        <main className="h-100 d-flex flex-column flex-md-row">
           {this.renderAlert()}
-          <Col sm={4}>
+          <Col as="aside" md={4} className="px-0 mr-md-3 mb-2 mb-md-0 d-flex flex-column">
             <ListGroup>
               <div className="d-flex justify-content-between mb-2">
                 <h4>Channels</h4>
@@ -63,22 +62,10 @@ class Chat extends React.Component {
               <ChannelList />
             </ListGroup>
           </Col>
-          <Col sm={8}>
-            <Tab.Content>
-              <Tab.Pane eventKey={currentChannelId}>
-                <Card className="text-left">
-                  <Card.Header><ChannelHeader /></Card.Header>
-                  <Card.Body>
-                    <MessageList />
-                  </Card.Body>
-                  <Card.Footer className="text-muted">
-                    <MessageForm />
-                  </Card.Footer>
-                </Card>
-              </Tab.Pane>
-            </Tab.Content>
+          <Col xs={11} md={8} as="section" className="d-flex flex-column flex-grow-1 px-0 ml-md-3 mw-100">
+            <ChatContainer />
           </Col>
-        </Row>
+        </main>
       </Tab.Container>
     );
   }

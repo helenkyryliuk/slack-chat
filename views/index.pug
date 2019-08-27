@@ -1,11 +1,12 @@
 doctype html
-html(lang="en")
+html.h-100(lang="en")
   head
     script(src='https://kit.fontawesome.com/e9f236eedb.js')
     title= Title
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     script.
       var gon = !{JSON.stringify(gon)};
-  body
+  body.h-100.d-flex.flex-column
     nav.navbar.navbar-expand-lg.navbar-light.bg-faded
       a.navbar-brand(href="/") Chat
       button.navbar-toggler(data-toggle="collapse" data-target="#navbarSupportedContent")
@@ -14,7 +15,7 @@ html(lang="en")
         ul.navbar-nav.mr-auto
           li.nav-item.active
             a.nav-link(href="/")
-    .container
-      #chat
+    .container.flex-grow-1
+      #chat.h-100
       // block content
     script(src='/assets/main.js')
