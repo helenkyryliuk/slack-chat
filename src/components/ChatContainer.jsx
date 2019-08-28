@@ -6,7 +6,7 @@ const style = {
   right: 0,
   left: 0,
   top: 0,
-  bottom: 100,
+  bottom: 80,
 };
 
 const ChatContainer = () => (

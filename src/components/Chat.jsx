@@ -10,6 +10,9 @@ import ChannelList from './ChannelList';
 import { channelsSelector } from '../selectors';
 import ChatContainer from './ChatContainer';
 
+const style = {
+  height: '100%',
+};
 
 const mapStateToProps = (state) => {
   const props = {
@@ -51,7 +54,7 @@ class Chat extends React.Component {
     } = this.props;
     return (
       <Tab.Container id="list-group-tabs-example" defaultActiveKey={currentChannelId}>
-        <main className="h-100 d-flex flex-column flex-md-row">
+        <main className="h-100 d-flex flex-column flex-md-row" style={style}>
           {this.renderAlert()}
           <Col as="aside" md={4} className="px-0 mr-md-3 mb-2 mb-md-0 d-flex flex-column">
             <ListGroup>

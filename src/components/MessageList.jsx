@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
   messagesBoxBottomAlignState: state.messagesBoxBottomAlignState,
 });
 const style = {
-  minHeight: '234px',
+  minHeight: '150px',
 };
 
   @connect(mapStateToProps)

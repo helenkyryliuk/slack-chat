@@ -48,7 +48,7 @@ class MessageForm extends React.Component {
       return (
         <form
           action=""
-          className="d-flex"
+          className=""
           onSubmit={handleSubmit(this.handleSubmit)}
         >
           <div className="input-group">
