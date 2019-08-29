@@ -55,7 +55,9 @@ class MessageList extends React.Component {
   );
 
   render() {
-    const { messageByChannel, messagesBoxBottomAlignState, t, currentChannel } = this.props;
+    const {
+      messageByChannel, messagesBoxBottomAlignState, t, currentChannel,
+    } = this.props;
 
     const noMessages = _.isEmpty(messageByChannel);
 
@@ -72,7 +74,6 @@ class MessageList extends React.Component {
       'justify-content-center': noMessages,
       'messages-box': true,
     });
-    console.log(currentChannel);
     return (
       <ScrollableContainer className="mb-4 border-gray border rounded" onScroll={this.handleScroll} alignToBottom={messagesBoxBottomAlignState === 'on'}>
         <ListGroup as="ul" variant="flush" className={classes} style={style}>
