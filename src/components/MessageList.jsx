@@ -4,13 +4,13 @@ import _ from 'lodash';
 import { withTranslation } from 'react-i18next';
 import { ListGroup } from 'react-bootstrap';
 import connect from '../connect';
-import { messagesSelector } from '../selectors';
+import { messagesSelector, channelNameSelector } from '../selectors';
 import ScrollableContainer from './ScrollableContainer';
-
 
 const mapStateToProps = state => ({
   messageByChannel: messagesSelector(state),
   messagesBoxBottomAlignState: state.messagesBoxBottomAlignState,
+  currentChannel: channelNameSelector(state),
 });
 const style = {
   minHeight: '150px',
@@ -55,18 +55,24 @@ class MessageList extends React.Component {
   );
 
   render() {
-    const { messageByChannel, messagesBoxBottomAlignState, t } = this.props;
+    const { messageByChannel, messagesBoxBottomAlignState, t, currentChannel } = this.props;
 
     const noMessages = _.isEmpty(messageByChannel);
 
     const boxContent = noMessages
-      ? <li className="text-center">{t('alert.channel-updated.channelIsEmpty')}</li>
+      ? (
+        <li className="text-center">
+          {`${currentChannel}`}
+          {t('alert.channel-updated.channelIsEmpty')}
+        </li>
+      )
       : _.map(messageByChannel, this.renderMessage);
 
     const classes = cn({
       'justify-content-center': noMessages,
       'messages-box': true,
     });
+    console.log(currentChannel);
     return (
       <ScrollableContainer className="mb-4 border-gray border rounded" onScroll={this.handleScroll} alignToBottom={messagesBoxBottomAlignState === 'on'}>
         <ListGroup as="ul" variant="flush" className={classes} style={style}>

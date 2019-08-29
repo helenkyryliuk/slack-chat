@@ -3,7 +3,7 @@
       "channel-updated": {
         "message": "You have successfully updated the channel",
         "headline": "Channel has been updated",
-        "channelIsEmpty" : "This channel is empty"
+        "channelIsEmpty" : " channel is empty"
       },
       "channel-added": {
         "message": "You have successfully added a new channel",
