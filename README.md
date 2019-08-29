@@ -12,6 +12,11 @@ Real-time chat in every channel
 
 ## :file_folder: Examples
 
+Chat online
+
+<p align="center">
+  <img alt="Updating channel" src="https://user-images.githubusercontent.com/29301041/63909368-84887d80-ca76-11e9-8b22-73734e85470c.gif"></p>
+
 Update channel 
 
 <p align="center">
