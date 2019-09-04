@@ -4,13 +4,13 @@ import _ from 'lodash';
 import { withTranslation } from 'react-i18next';
 import { ListGroup } from 'react-bootstrap';
 import connect from '../connect';
-import { messagesSelector, channelNameSelector } from '../selectors';
+import { messagesSelector } from '../selectors';
 import ScrollableContainer from './ScrollableContainer';
 
 const mapStateToProps = state => ({
   messageByChannel: messagesSelector(state),
   messagesBoxBottomAlignState: state.messagesBoxBottomAlignState,
-  currentChannel: channelNameSelector(state),
+  currentChannel: _.get(state.channelsState.byId, [state.currentChannelId, 'name'], ''),
 });
 const style = {
   minHeight: '150px',

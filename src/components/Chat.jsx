@@ -36,7 +36,7 @@ class Chat extends React.Component {
       <div>
         <AlertContainer>
           <Alert
-            timeout={3000}
+            timeout={1000}
             onDismiss={dismissNotification}
             type={notification.type}
             headline={t(notification.headline)}

@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import _ from 'lodash';
 
 export const getChannelsById = state => state.channelsState.byId;
 export const getChannelsIds = state => state.channelsState.allIds;
@@ -15,11 +14,6 @@ export const messagesSelector = createSelector(
 export const channelsSelector = createSelector(
   [getChannelsById, getChannelsIds],
   (byId, allIds) => allIds.map(id => byId[id]),
-);
-
-export const channelNameSelector = createSelector(
-  [getChannelsById, getCurrentChannelId],
-  (byId, currentChannelId) => _.get(byId, [currentChannelId, 'name'], ''),
 );
 
 export const currentChannelSelector = createSelector(

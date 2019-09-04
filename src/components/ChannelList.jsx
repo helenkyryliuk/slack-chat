@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import cn from 'classnames';
 import {
   Button, ButtonGroup, ListGroup,
@@ -6,14 +7,16 @@ import {
 import ModalRemoveChannel from './ModalRemoveChannel';
 import ModalRenameChannel from './ModalRenameChannel';
 import connect from '../connect';
-import { channelsSelector, channelNameSelector } from '../selectors';
+import { channelsSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
   const props = {
     channels: channelsSelector(state),
     currentChannelId: state.currentChannelId,
-    currentChannelName: channelNameSelector(state),
+    currentChannelName: _.get(state.channelsState.byId, [state.currentChannelId, 'name'], ''),
   };
+  console.log(state.currentChannelId);
+  console.log(state.channelsState.byId);
   return props;
 };
 
@@ -31,6 +34,7 @@ class ChannelList extends React.Component {
       const classesForChannelName = id => ({
         'text-light': id === currentChannelId,
       });
+      console.log(currentChannelName);
       return (
         <>
           {channels.map(({ id, name, removable }) => (
