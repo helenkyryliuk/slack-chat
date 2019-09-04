@@ -11,7 +11,7 @@ import { channelsSelector } from '../selectors';
 import ChatContainer from './ChatContainer';
 
 const style = {
-  height: '100%',
+  'min-height': '700px',
 };
 
 const mapStateToProps = (state) => {
